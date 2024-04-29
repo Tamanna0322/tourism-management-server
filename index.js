@@ -33,6 +33,13 @@ async function run() {
     const touristCollection = client.db('tourDB').collection('add');
 
  
+    app.get('/add', async(req, res) =>{
+      const cursor = touristCollection.find();
+      const result = await cursor.toArray();
+      res.send(result);
+    })
+
+
     app.post('/add', async(req,res)=>{
       const addTourist = req.body;
       console.log(addTourist)
