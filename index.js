@@ -39,6 +39,11 @@ async function run() {
       res.send(result);
     })
 
+    app.get('/add/sort', async(req,res) =>{
+      const sortedTourists = await touristCollection.find().sort({average: 1}).toArray();
+      res.json(sortedTourists);
+    })
+
 
     app.post('/add', async(req,res)=>{
       const addTourist = req.body;
