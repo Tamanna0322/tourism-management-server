@@ -51,6 +51,13 @@ async function run() {
       res.send(result);
     })
 
+    app.get('/add/:id', async(req, res) =>{
+      const id = req.params.id;
+      const query = {_id: new ObjectId(id)}
+      const result = await touristCollection.findOne(query);
+      res.send(result);
+    })
+
 
     app.post('/add', async(req,res)=>{
       const addTourist = req.body;
