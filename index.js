@@ -7,7 +7,9 @@ const port = process.env.PORT || 5000;
 
 
 // middleware
-app.use(cors());
+app.use(cors({
+  origin: ["http://localhost:5173", "https://tourism-management-600b9.web.app", "https://tourism-management-600b9.firebaseapp.com"]
+}));
 app.use(express.json());
 
 
@@ -31,11 +33,18 @@ async function run() {
     // await client.connect();
 
     const touristCollection = client.db('tourDB').collection('add');
+    const countryCollection = client.db('tourDB').collection('country');
 
  
     app.get('/add', async(req, res) =>{
       const cursor = touristCollection.find();
       const result = await cursor.toArray();
+      res.send(result);
+    })
+
+    app.get('/country', async(req, res) =>{
+      const cursor = countryCollection.find();
+      const result= await cursor.toArray();
       res.send(result);
     })
 
